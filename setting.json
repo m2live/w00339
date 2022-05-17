@@ -13,15 +13,21 @@
                     "www.winesoft.co.kr"
                 ]
             },
-            "name": "www.winesoft.co.kr",
+            "name": "158.247.203.38",
+            "urlRewrites": [
+                {
+                    "pattern": "/(.png) ",
+                    "replace": "/#1/dims/resize/20x20/optimize"
+                }
+            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "keyword": "dims",
                             "maxSourceSize": 10,
                             "enable": true,
-                            "minSourceSize": 0
+                            "minSourceSize": 0,
+                            "keyword": "dims"
                         }
                     }
                 }
