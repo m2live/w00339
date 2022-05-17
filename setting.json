@@ -14,24 +14,24 @@
                 ]
             },
             "name": "158.247.203.38",
-            "urlRewrites": [
-                {
-                    "pattern": "/(.png) ",
-                    "replace": "/#1/dims/resize/20x20/optimize"
-                }
-            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "maxSourceSize": 10,
                             "enable": true,
-                            "minSourceSize": 0,
-                            "keyword": "dims"
+                            "keyword": "dims",
+                            "maxSourceSize": 10,
+                            "minSourceSize": 0
                         }
                     }
                 }
             },
+            "urlRewrites": [
+                {
+                    "pattern": "(.png)",
+                    "replace": "#1/dims/quality/50/optimize"
+                }
+            ],
             "enable": true
         }
     ],
