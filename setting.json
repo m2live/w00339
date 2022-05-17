@@ -11,25 +11,21 @@
                 "protocol": "HTTPS",
                 "address": [
                     "www.winesoft.co.kr"
-                ],
-                "byClient": {
-                    "enable": true,
-                    "keyword": "external"
-                }
+                ]
             },
-            "name": "158.247.203.38",
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
                             "maxSourceSize": 10,
-                            "keyword": "dims",
+                            "minSourceSize": 0,
                             "enable": true,
-                            "minSourceSize": 0
+                            "keyword": "dims"
                         }
                     }
                 }
             },
+            "name": "158.247.203.38",
             "enable": true
         }
     ],
