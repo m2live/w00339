@@ -9,29 +9,23 @@
             "listen": "*:80",
             "origin": {
                 "protocol": "HTTPS",
-                "byClient": {
-                    "keyword": "external",
-                    "enable": true
-                },
                 "address": [
                     "www.winesoft.co.kr"
-                ]
+                ],
+                "byClient": {
+                    "enable": true,
+                    "keyword": "external"
+                }
             },
             "name": "158.247.203.38",
-            "urlRewrites": [
-                {
-                    "pattern": "(.png)$",
-                    "replace": "#1/dims/format/webp/quality/90/optimize"
-                }
-            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
+                            "maxSourceSize": 10,
                             "keyword": "dims",
-                            "minSourceSize": 0,
                             "enable": true,
-                            "maxSourceSize": 10
+                            "minSourceSize": 0
                         }
                     }
                 }
