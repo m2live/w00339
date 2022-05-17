@@ -17,19 +17,25 @@
                     "www.winesoft.co.kr"
                 ]
             },
+            "name": "158.247.203.38",
+            "urlRewrites": [
+                {
+                    "pattern": "(.png)$",
+                    "replace": "#1/dims/format/webp/quality/90/optimize"
+                }
+            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "enable": true,
                             "keyword": "dims",
-                            "maxSourceSize": 10,
-                            "minSourceSize": 0
+                            "minSourceSize": 0,
+                            "enable": true,
+                            "maxSourceSize": 10
                         }
                     }
                 }
             },
-            "name": "158.247.203.38",
             "enable": true
         }
     ],
