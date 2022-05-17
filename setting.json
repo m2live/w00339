@@ -11,27 +11,31 @@
                 "protocol": "HTTPS",
                 "address": [
                     "www.winesoft.co.kr"
-                ]
-            },
-            "urlRewrites": [
-                {
-                    "pattern": "(.png)$",
-                    "replace": "#1/dims/format/webp/quality/70/optimize"
+                ],
+                "byClient": {
+                    "enable": true,
+                    "keyword": "external"
                 }
-            ],
-            "name": "158.247.203.38",
+            },
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "minSourceSize": 0,
                             "maxSourceSize": 10,
                             "keyword": "dims",
-                            "enable": true
+                            "enable": true,
+                            "minSourceSize": 0
                         }
                     }
                 }
             },
+            "name": "158.247.203.38",
+            "urlRewrites": [
+                {
+                    "replace": "#1/dims/format/webp/quality/70/optimize ",
+                    "pattern": "(.png)$"
+                }
+            ],
             "enable": true
         }
     ],
