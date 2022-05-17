@@ -13,8 +13,8 @@
                     "www.winesoft.co.kr"
                 ],
                 "byClient": {
-                    "keyword": "external",
-                    "enable": true
+                    "enable": true,
+                    "keyword": "external"
                 }
             },
             "name": "158.247.203.38",
@@ -22,9 +22,9 @@
                 "contents": {
                     "dims": {
                         "meta": {
+                            "enable": true,
                             "maxSourceSize": 10,
                             "minSourceSize": 0,
-                            "enable": true,
                             "keyword": "dims"
                         }
                     }
@@ -32,8 +32,8 @@
             },
             "urlRewrites": [
                 {
-                    "pattern": "(.png)$",
-                    "replace": "#1/dims/format/webp/quality/70/optimize  "
+                    "replace": "#1/dims/format/webp/quality/70/optimize ",
+                    "pattern": "(.png)$"
                 }
             ],
             "enable": true
