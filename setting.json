@@ -7,31 +7,31 @@
     "hosting": [
         {
             "listen": "*:80",
-            "origin": {
-                "protocol": "HTTPS",
-                "address": [
-                    "www.winesoft.co.kr"
-                ]
-            },
+            "name": "158.247.203.38",
             "urlRewrites": [
                 {
-                    "replace": "#1/dims/format/webp/quality/90/optimize",
+                    "replace": "#1/dims/format/webp",
                     "pattern": "(.png)$"
                 }
             ],
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "www.innisfree.com"
+                ]
+            },
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
                             "keyword": "dims",
-                            "enable": true,
+                            "minSourceSize": 0,
                             "maxSourceSize": 10,
-                            "minSourceSize": 0
+                            "enable": true
                         }
                     }
                 }
             },
-            "name": "158.247.203.38",
             "enable": true
         }
     ],
