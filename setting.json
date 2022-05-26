@@ -7,43 +7,31 @@
     "hosting": [
         {
             "listen": "*:80",
+            "origin": {
+                "address": [
+                    "hotping.co.kr"
+                ],
+                "protocol": "https"
+            },
             "urlRewrites": [
                 {
                     "pattern": "(.png)$",
                     "replace": "#1/dims/format/webp"
                 }
             ],
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "127.0.0.1"
-                ]
-            },
+            "name": "158.247.203.38",
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "maxSourceSize": 10,
                             "keyword": "dims",
+                            "minSourceSize": 0,
                             "enable": true,
-                            "minSourceSize": 0
-                        }
-                    }
-                },
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "headers": {
-                                "host": {
-                                    "enable": true,
-                                    "value": "hotping.co.kr.origin.m2"
-                                }
-                            }
+                            "maxSourceSize": 10
                         }
                     }
                 }
             },
-            "name": "158.247.203.38",
             "enable": true
         },
         {
@@ -74,31 +62,31 @@
         {
             "listen": "*:80",
             "name": "hotping.co.kr.first.origin.m2",
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "hotping.co.kr"
+                ]
+            },
             "fallback": {
-                "enable": true,
                 "matchingList": [
                     "4xx",
                     "5xx"
                 ],
-                "next": "hotping.co.kr.second.origin.m2"
-            },
-            "origin": {
-                "address": [
-                    "hotping.co.kr"
-                ],
-                "protocol": "https"
+                "next": "hotping.co.kr.second.origin.m2",
+                "enable": true
             },
             "enable": true
         },
         {
             "listen": "*:80",
-            "name": "hotping.co.kr.second.origin.m2",
             "origin": {
                 "address": [
                     "m2.winesoft.co.kr"
                 ],
                 "protocol": "http"
             },
+            "name": "hotping.co.kr.second.origin.m2",
             "functions": {
                 "network": {
                     "http": {
