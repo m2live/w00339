@@ -7,27 +7,108 @@
     "hosting": [
         {
             "listen": "*:80",
-            "name": "158.247.203.38",
             "urlRewrites": [
                 {
-                    "replace": "#1/dims/format/webp",
-                    "pattern": "(.png)$"
+                    "pattern": "(.png)$",
+                    "replace": "#1/dims/format/webp"
                 }
             ],
             "origin": {
-                "protocol": "https",
+                "protocol": "http",
                 "address": [
-                    "www.innisfree.com"
+                    "127.0.0.1"
                 ]
             },
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "keyword": "dims",
-                            "minSourceSize": 0,
                             "maxSourceSize": 10,
-                            "enable": true
+                            "keyword": "dims",
+                            "enable": true,
+                            "minSourceSize": 0
+                        }
+                    }
+                },
+                "network": {
+                    "http": {
+                        "backEnd": {
+                            "headers": {
+                                "host": {
+                                    "enable": true,
+                                    "value": "hotping.co.kr.origin.m2"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "name": "158.247.203.38",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "functions": {
+                "network": {
+                    "http": {
+                        "backEnd": {
+                            "headers": {
+                                "host": {
+                                    "value": "hotping.co.kr.first.origin.m2",
+                                    "enable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "name": "hotping.co.kr.origin.m2",
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "127.0.0.1"
+                ]
+            },
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "name": "hotping.co.kr.first.origin.m2",
+            "fallback": {
+                "enable": true,
+                "matchingList": [
+                    "4xx",
+                    "5xx"
+                ],
+                "next": "hotping.co.kr.second.origin.m2"
+            },
+            "origin": {
+                "address": [
+                    "hotping.co.kr"
+                ],
+                "protocol": "https"
+            },
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "name": "hotping.co.kr.second.origin.m2",
+            "origin": {
+                "address": [
+                    "m2.winesoft.co.kr"
+                ],
+                "protocol": "http"
+            },
+            "functions": {
+                "network": {
+                    "http": {
+                        "backEnd": {
+                            "headers": {
+                                "host": {
+                                    "value": "hotping.co.kr",
+                                    "enable": true
+                                }
+                            }
                         }
                     }
                 }
