@@ -726,94 +726,133 @@
     "hosting": [
         {
             "listen": "*:80",
-            "origin": {
-                "address": [
-                    "www.1300k.com"
-                ],
-                "protocol": "https"
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 10,
+                            "enable": true,
+                            "minSourceSize": 0,
+                            "keyword": "dims"
+                        }
+                    }
+                }
             },
-            "name": "www.1300k.com",
             "urlRewrites": [
                 {
                     "pattern": "(.png)$",
                     "replace": "#1/dims/format/webp"
                 }
             ],
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "enable": true,
-                            "keyword": "dims",
-                            "minSourceSize": 0,
-                            "maxSourceSize": 10
-                        }
-                    }
-                }
+            "name": "www.1300k.com",
+            "origin": {
+                "address": [
+                    "www.1300k.com"
+                ],
+                "protocol": "https"
             },
             "enable": true
         },
         {
             "listen": "*:80",
+            "name": "imgc.1300k.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "keyword": "dims",
+                            "maxSourceSize": 20,
+                            "enable": true,
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
             "origin": {
                 "address": [
                     "imgc.1300k.com"
                 ],
                 "protocol": "https"
             },
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "maxSourceSize": 20,
-                            "keyword": "dims",
-                            "minSourceSize": 0,
-                            "enable": true
-                        }
-                    }
-                }
-            },
-            "name": "imgc.1300k.com",
             "enable": true
         },
         {
             "listen": "*:80",
             "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "enable": true,
-                            "maxSourceSize": 20,
-                            "keyword": "dims"
-                        }
-                    }
-                },
                 "network": {
                     "http": {
                         "backEnd": {
-                            "session": {
-                                "connectTimeout": 3,
-                                "busyCount": 0,
-                                "reuseTimeout": 60,
-                                "receiveTimeout": 300
-                            },
-                            "headers": {
-                                "host": {
-                                    "enable": true,
-                                    "value": "shop-api.e-ncp.com.origin.m2"
-                                }
-                            },
                             "health": {
                                 "exclusion": {
                                     "count": 3
                                 }
+                            },
+                            "session": {
+                                "reuseTimeout": 60,
+                                "receiveTimeout": 300,
+                                "connectTimeout": 3,
+                                "busyCount": 0
+                            },
+                            "headers": {
+                                "host": {
+                                    "value": "pay.kcp.co.kr.origin.m2",
+                                    "enable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 20,
+                            "enable": true,
+                            "keyword": "dims",
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "127.0.0.1"
+                ]
+            },
+            "name": "pay.kcp.co.kr",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "name": "pay.kcp.co.kr.origin.m2",
+            "functions": {
+                "network": {
+                    "http": {
+                        "backEnd": {
+                            "health": {
+                                "exclusion": {
+                                    "count": 3
+                                }
+                            },
+                            "headers": {
+                                "host": {
+                                    "value": "pay.kcp.co.kr.first.origin.m2",
+                                    "enable": true
+                                }
+                            },
+                            "session": {
+                                "reuseTimeout": 60,
+                                "busyCount": 0,
+                                "receiveTimeout": 300,
+                                "connectTimeout": 3
                             }
                         }
                     }
                 }
             },
-            "name": "shop-api.e-ncp.com",
+            "mode": {
+                "instant": true
+            },
             "origin": {
                 "protocol": "http",
                 "address": [
@@ -824,90 +863,51 @@
         },
         {
             "listen": "*:80",
-            "name": "shop-api.e-ncp.com.origin.m2",
-            "mode": {
-                "instant": true
-            },
-            "origin": {
-                "address": [
-                    "127.0.0.1"
-                ],
-                "protocol": "http"
-            },
-            "functions": {
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "headers": {
-                                "host": {
-                                    "value": "shop-api.e-ncp.com.first.origin.m2",
-                                    "enable": true
-                                }
-                            },
-                            "health": {
-                                "exclusion": {
-                                    "count": 3
-                                }
-                            },
-                            "session": {
-                                "receiveTimeout": 300,
-                                "reuseTimeout": 60,
-                                "busyCount": 0,
-                                "connectTimeout": 3
-                            }
-                        }
-                    }
-                }
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "origin": {
-                "address": [
-                    "shop-api.e-ncp.com"
-                ],
-                "protocol": "https"
-            },
             "fallback": {
+                "enable": true,
+                "next": "pay.kcp.co.kr.second.origin.m2",
                 "matchingList": [
                     "4xx",
                     "5xx"
-                ],
-                "enable": true,
-                "next": "shop-api.e-ncp.com.second.origin.m2"
+                ]
             },
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "pay.kcp.co.kr"
+                ]
+            },
+            "name": "pay.kcp.co.kr.first.origin.m2",
             "mode": {
                 "instant": true
             },
-            "name": "shop-api.e-ncp.com.first.origin.m2",
             "enable": true
         },
         {
             "listen": "*:80",
-            "name": "shop-api.e-ncp.com.second.origin.m2",
             "origin": {
+                "protocol": "http",
                 "address": [
                     "m2.winesoft.co.kr"
-                ],
-                "protocol": "http"
+                ]
             },
+            "mode": {
+                "instant": true
+            },
+            "name": "pay.kcp.co.kr.second.origin.m2",
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
                             "headers": {
                                 "host": {
-                                    "value": "shop-api.e-ncp.com",
+                                    "value": "pay.kcp.co.kr",
                                     "enable": true
                                 }
                             }
                         }
                     }
                 }
-            },
-            "mode": {
-                "instant": true
             },
             "enable": true
         }
