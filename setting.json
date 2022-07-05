@@ -726,35 +726,41 @@
     "hosting": [
         {
             "listen": "*:80",
-            "name": "www.1300k.com",
             "origin": {
-                "protocol": "https",
                 "address": [
                     "www.1300k.com"
-                ]
+                ],
+                "protocol": "https"
             },
+            "name": "www.1300k.com",
+            "urlRewrites": [
+                {
+                    "pattern": "(.png)$",
+                    "replace": "#1/dims/format/webp"
+                }
+            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "minSourceSize": 0,
                             "enable": true,
-                            "maxSourceSize": 10,
-                            "keyword": "dims"
+                            "keyword": "dims",
+                            "minSourceSize": 0,
+                            "maxSourceSize": 10
                         }
                     }
                 }
             },
-            "urlRewrites": [
-                {
-                    "replace": "#1/dims/format/webp",
-                    "pattern": "(.png)$"
-                }
-            ],
             "enable": true
         },
         {
             "listen": "*:80",
+            "origin": {
+                "address": [
+                    "imgc.1300k.com"
+                ],
+                "protocol": "https"
+            },
             "functions": {
                 "contents": {
                     "dims": {
@@ -767,22 +773,77 @@
                     }
                 }
             },
-            "origin": {
-                "address": [
-                    "imgc.1300k.com"
-                ],
-                "protocol": "https"
-            },
             "name": "imgc.1300k.com",
             "enable": true
         },
         {
             "listen": "*:80",
-            "name": "fonts.gstatic.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "minSourceSize": 0,
+                            "enable": true,
+                            "maxSourceSize": 20,
+                            "keyword": "dims"
+                        }
+                    }
+                },
+                "network": {
+                    "http": {
+                        "backEnd": {
+                            "session": {
+                                "connectTimeout": 3,
+                                "busyCount": 0,
+                                "reuseTimeout": 60,
+                                "receiveTimeout": 300
+                            },
+                            "headers": {
+                                "host": {
+                                    "enable": true,
+                                    "value": "shop-api.e-ncp.com.origin.m2"
+                                }
+                            },
+                            "health": {
+                                "exclusion": {
+                                    "count": 3
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "name": "shop-api.e-ncp.com",
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "127.0.0.1"
+                ]
+            },
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "name": "shop-api.e-ncp.com.origin.m2",
+            "mode": {
+                "instant": true
+            },
+            "origin": {
+                "address": [
+                    "127.0.0.1"
+                ],
+                "protocol": "http"
+            },
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
+                            "headers": {
+                                "host": {
+                                    "value": "shop-api.e-ncp.com.first.origin.m2",
+                                    "enable": true
+                                }
+                            },
                             "health": {
                                 "exclusion": {
                                     "count": 3
@@ -790,81 +851,23 @@
                             },
                             "session": {
                                 "receiveTimeout": 300,
-                                "busyCount": 0,
                                 "reuseTimeout": 60,
+                                "busyCount": 0,
                                 "connectTimeout": 3
-                            },
-                            "headers": {
-                                "host": {
-                                    "enable": true,
-                                    "value": "fonts.gstatic.com.origin.m2"
-                                }
                             }
-                        }
-                    }
-                },
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "maxSourceSize": 20,
-                            "minSourceSize": 0,
-                            "enable": true,
-                            "keyword": "dims"
                         }
                     }
                 }
             },
+            "enable": true
+        },
+        {
+            "listen": "*:80",
             "origin": {
                 "address": [
-                    "127.0.0.1"
+                    "shop-api.e-ncp.com"
                 ],
-                "protocol": "http"
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "fonts.gstatic.com.origin.m2",
-            "functions": {
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "session": {
-                                "connectTimeout": 3,
-                                "reuseTimeout": 60,
-                                "busyCount": 0,
-                                "receiveTimeout": 300
-                            },
-                            "headers": {
-                                "host": {
-                                    "value": "fonts.gstatic.com.first.origin.m2",
-                                    "enable": true
-                                }
-                            },
-                            "health": {
-                                "exclusion": {
-                                    "count": 3
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "127.0.0.1"
-                ]
-            },
-            "mode": {
-                "instant": true
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "mode": {
-                "instant": true
+                "protocol": "https"
             },
             "fallback": {
                 "matchingList": [
@@ -872,26 +875,30 @@
                     "5xx"
                 ],
                 "enable": true,
-                "next": "fonts.gstatic.com.second.origin.m2"
+                "next": "shop-api.e-ncp.com.second.origin.m2"
             },
-            "name": "fonts.gstatic.com.first.origin.m2",
-            "origin": {
-                "address": [
-                    "fonts.gstatic.com"
-                ],
-                "protocol": "https"
+            "mode": {
+                "instant": true
             },
+            "name": "shop-api.e-ncp.com.first.origin.m2",
             "enable": true
         },
         {
             "listen": "*:80",
+            "name": "shop-api.e-ncp.com.second.origin.m2",
+            "origin": {
+                "address": [
+                    "m2.winesoft.co.kr"
+                ],
+                "protocol": "http"
+            },
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
                             "headers": {
                                 "host": {
-                                    "value": "fonts.gstatic.com",
+                                    "value": "shop-api.e-ncp.com",
                                     "enable": true
                                 }
                             }
@@ -899,16 +906,9 @@
                     }
                 }
             },
-            "origin": {
-                "address": [
-                    "m2.winesoft.co.kr"
-                ],
-                "protocol": "http"
-            },
             "mode": {
                 "instant": true
             },
-            "name": "fonts.gstatic.com.second.origin.m2",
             "enable": true
         }
     ]
