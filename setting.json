@@ -726,24 +726,24 @@
     "hosting": [
         {
             "listen": "*:80",
+            "name": "www.1300k.com",
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "www.1300k.com"
+                ]
+            },
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "maxSourceSize": 10,
-                            "enable": true,
                             "minSourceSize": 0,
+                            "enable": true,
+                            "maxSourceSize": 10,
                             "keyword": "dims"
                         }
                     }
                 }
-            },
-            "name": "www.1300k.com",
-            "origin": {
-                "address": [
-                    "www.1300k.com"
-                ],
-                "protocol": "https"
             },
             "urlRewrites": [
                 {
@@ -755,6 +755,18 @@
         },
         {
             "listen": "*:80",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 20,
+                            "keyword": "dims",
+                            "minSourceSize": 0,
+                            "enable": true
+                        }
+                    }
+                }
+            },
             "origin": {
                 "address": [
                     "imgc.1300k.com"
@@ -762,53 +774,42 @@
                 "protocol": "https"
             },
             "name": "imgc.1300k.com",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "maxSourceSize": 20,
-                            "keyword": "dims",
-                            "enable": true
-                        }
-                    }
-                }
-            },
             "enable": true
         },
         {
             "listen": "*:80",
+            "name": "fonts.gstatic.com",
             "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "keyword": "dims",
-                            "maxSourceSize": 20,
-                            "enable": true
-                        }
-                    }
-                },
                 "network": {
                     "http": {
                         "backEnd": {
-                            "session": {
-                                "busyCount": 0,
-                                "connectTimeout": 3,
-                                "reuseTimeout": 60,
-                                "receiveTimeout": 300
-                            },
                             "health": {
                                 "exclusion": {
                                     "count": 3
                                 }
                             },
+                            "session": {
+                                "receiveTimeout": 300,
+                                "busyCount": 0,
+                                "reuseTimeout": 60,
+                                "connectTimeout": 3
+                            },
                             "headers": {
                                 "host": {
-                                    "value": "pay.kcp.co.kr.origin.m2",
-                                    "enable": true
+                                    "enable": true,
+                                    "value": "fonts.gstatic.com.origin.m2"
                                 }
                             }
+                        }
+                    }
+                },
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 20,
+                            "minSourceSize": 0,
+                            "enable": true,
+                            "keyword": "dims"
                         }
                     }
                 }
@@ -819,35 +820,25 @@
                 ],
                 "protocol": "http"
             },
-            "name": "pay.kcp.co.kr",
             "enable": true
         },
         {
             "listen": "*:80",
-            "mode": {
-                "instant": true
-            },
-            "name": "pay.kcp.co.kr.origin.m2",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "127.0.0.1"
-                ]
-            },
+            "name": "fonts.gstatic.com.origin.m2",
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
                             "session": {
                                 "connectTimeout": 3,
-                                "receiveTimeout": 300,
                                 "reuseTimeout": 60,
-                                "busyCount": 0
+                                "busyCount": 0,
+                                "receiveTimeout": 300
                             },
                             "headers": {
                                 "host": {
-                                    "enable": true,
-                                    "value": "pay.kcp.co.kr.first.origin.m2"
+                                    "value": "fonts.gstatic.com.first.origin.m2",
+                                    "enable": true
                                 }
                             },
                             "health": {
@@ -859,45 +850,48 @@
                     }
                 }
             },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
             "origin": {
-                "protocol": "https",
+                "protocol": "http",
                 "address": [
-                    "pay.kcp.co.kr"
+                    "127.0.0.1"
                 ]
             },
             "mode": {
                 "instant": true
             },
-            "name": "pay.kcp.co.kr.first.origin.m2",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "mode": {
+                "instant": true
+            },
             "fallback": {
-                "next": "pay.kcp.co.kr.second.origin.m2",
-                "enable": true,
                 "matchingList": [
                     "4xx",
                     "5xx"
-                ]
+                ],
+                "enable": true,
+                "next": "fonts.gstatic.com.second.origin.m2"
+            },
+            "name": "fonts.gstatic.com.first.origin.m2",
+            "origin": {
+                "address": [
+                    "fonts.gstatic.com"
+                ],
+                "protocol": "https"
             },
             "enable": true
         },
         {
             "listen": "*:80",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "m2.winesoft.co.kr"
-                ]
-            },
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
                             "headers": {
                                 "host": {
-                                    "value": "pay.kcp.co.kr",
+                                    "value": "fonts.gstatic.com",
                                     "enable": true
                                 }
                             }
@@ -905,10 +899,16 @@
                     }
                 }
             },
+            "origin": {
+                "address": [
+                    "m2.winesoft.co.kr"
+                ],
+                "protocol": "http"
+            },
             "mode": {
                 "instant": true
             },
-            "name": "pay.kcp.co.kr.second.origin.m2",
+            "name": "fonts.gstatic.com.second.origin.m2",
             "enable": true
         }
     ]
