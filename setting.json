@@ -730,20 +730,20 @@
                 "contents": {
                     "dims": {
                         "meta": {
-                            "enable": true,
-                            "keyword": "dims",
                             "maxSourceSize": 10,
-                            "minSourceSize": 0
+                            "enable": true,
+                            "minSourceSize": 0,
+                            "keyword": "dims"
                         }
                     }
                 }
             },
             "name": "www.1300k.com",
             "origin": {
-                "protocol": "https",
                 "address": [
                     "www.1300k.com"
-                ]
+                ],
+                "protocol": "https"
             },
             "urlRewrites": [
                 {
@@ -755,18 +755,6 @@
         },
         {
             "listen": "*:80",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "keyword": "dims",
-                            "maxSourceSize": 20,
-                            "enable": true,
-                            "minSourceSize": 0
-                        }
-                    }
-                }
-            },
             "origin": {
                 "address": [
                     "imgc.1300k.com"
@@ -774,120 +762,134 @@
                 "protocol": "https"
             },
             "name": "imgc.1300k.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "minSourceSize": 0,
+                            "maxSourceSize": 20,
+                            "keyword": "dims",
+                            "enable": true
+                        }
+                    }
+                }
+            },
             "enable": true
         },
         {
             "listen": "*:80",
-            "origin": {
-                "address": [
-                    "127.0.0.1"
-                ],
-                "protocol": "http"
-            },
             "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "minSourceSize": 0,
+                            "keyword": "dims",
+                            "maxSourceSize": 20,
+                            "enable": true
+                        }
+                    }
+                },
                 "network": {
                     "http": {
                         "backEnd": {
-                            "headers": {
-                                "host": {
-                                    "value": "pay.kcp.co.kr.origin.m2",
-                                    "enable": true
-                                }
+                            "session": {
+                                "busyCount": 0,
+                                "connectTimeout": 3,
+                                "reuseTimeout": 60,
+                                "receiveTimeout": 300
                             },
                             "health": {
                                 "exclusion": {
                                     "count": 3
                                 }
                             },
-                            "session": {
-                                "busyCount": 0,
-                                "connectTimeout": 3,
-                                "reuseTimeout": 60,
-                                "receiveTimeout": 300
+                            "headers": {
+                                "host": {
+                                    "value": "pay.kcp.co.kr.origin.m2",
+                                    "enable": true
+                                }
                             }
                         }
                     }
-                },
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "keyword": "dims",
-                            "maxSourceSize": 20,
-                            "enable": true,
-                            "minSourceSize": 0
-                        }
-                    }
                 }
+            },
+            "origin": {
+                "address": [
+                    "127.0.0.1"
+                ],
+                "protocol": "http"
             },
             "name": "pay.kcp.co.kr",
             "enable": true
         },
         {
             "listen": "*:80",
+            "mode": {
+                "instant": true
+            },
+            "name": "pay.kcp.co.kr.origin.m2",
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "127.0.0.1"
+                ]
+            },
             "functions": {
                 "network": {
                     "http": {
                         "backEnd": {
+                            "session": {
+                                "connectTimeout": 3,
+                                "receiveTimeout": 300,
+                                "reuseTimeout": 60,
+                                "busyCount": 0
+                            },
                             "headers": {
                                 "host": {
-                                    "value": "pay.kcp.co.kr.first.origin.m2",
-                                    "enable": true
+                                    "enable": true,
+                                    "value": "pay.kcp.co.kr.first.origin.m2"
                                 }
                             },
                             "health": {
                                 "exclusion": {
                                     "count": 3
                                 }
-                            },
-                            "session": {
-                                "busyCount": 0,
-                                "reuseTimeout": 60,
-                                "connectTimeout": 3,
-                                "receiveTimeout": 300
                             }
                         }
                     }
                 }
             },
-            "name": "pay.kcp.co.kr.origin.m2",
-            "origin": {
-                "address": [
-                    "127.0.0.1"
-                ],
-                "protocol": "http"
-            },
-            "mode": {
-                "instant": true
-            },
             "enable": true
         },
         {
             "listen": "*:80",
             "origin": {
+                "protocol": "https",
                 "address": [
                     "pay.kcp.co.kr"
-                ],
-                "protocol": "http"
+                ]
             },
             "mode": {
                 "instant": true
             },
+            "name": "pay.kcp.co.kr.first.origin.m2",
             "fallback": {
                 "next": "pay.kcp.co.kr.second.origin.m2",
+                "enable": true,
                 "matchingList": [
                     "4xx",
                     "5xx"
-                ],
-                "enable": true
+                ]
             },
-            "name": "pay.kcp.co.kr.first.origin.m2",
             "enable": true
         },
         {
             "listen": "*:80",
-            "name": "pay.kcp.co.kr.second.origin.m2",
-            "mode": {
-                "instant": true
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "m2.winesoft.co.kr"
+                ]
             },
             "functions": {
                 "network": {
@@ -903,12 +905,10 @@
                     }
                 }
             },
-            "origin": {
-                "address": [
-                    "m2.winesoft.co.kr"
-                ],
-                "protocol": "http"
+            "mode": {
+                "instant": true
             },
+            "name": "pay.kcp.co.kr.second.origin.m2",
             "enable": true
         }
     ]
