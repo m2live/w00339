@@ -73,6 +73,43 @@
         "management": {
             "api": {
                 "port": 10040
+            },
+            "server": {
+                "enable": true,
+                "connection": [
+                    {
+                        "name": "myFirebase",
+                        "type": "firebasePubsub",
+                        "info": {
+                            "apiKey": "AIzaSyDDLFgv6PQnLyvdknDiGTB4JVGws5jZeTA",
+                            "authDomain": "stg-m2live-api.firebaseapp.com ",
+                            "databaseUrl": "https://stg-m2live-api.firebaseio.com",
+                            "projectId": "stg-m2live-api",
+                            "storageBucket": "stg-m2live-api.appspot.com",
+                            "messagingSenderId": "370817246668",
+                            "appId": "1:370817246668:web:d8546f78b2330d6a396969"
+                        }
+                    }
+                ],
+                "features": {
+                    "setting": {
+                        "enable": true,
+                        "feed": {
+                            "type": "firestore",
+                            "info": {
+                                "connect": "myFirebase",
+                                "doc": "m2nodes/#m2live.nodeId/events"
+                            }
+                        },
+                        "feedback": {
+                            "type": "firestore",
+                            "info": {
+                                "connect": "myFirebase",
+                                "doc": "m2nodes/#m2live.nodeId/feedbacks"
+                            }
+                        }
+                    }
+                }
             }
         },
         "properties": {
@@ -722,217 +759,5 @@
                 }
             }
         }
-    },
-    "hosting": [
-        {
-            "listen": "*:80",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "enable": true,
-                            "maxSourceSize": 10,
-                            "keyword": "dims"
-                        }
-                    }
-                }
-            },
-            "urlRewrites": [
-                {
-                    "pattern": "(.png)$",
-                    "replace": "#1/dims/format/webp"
-                }
-            ],
-            "origin": {
-                "address": [
-                    "www.1300k.com"
-                ],
-                "protocol": "https"
-            },
-            "name": "www.1300k.com",
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "imgc.1300k.com",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "enable": true,
-                            "keyword": "dims",
-                            "minSourceSize": 0,
-                            "maxSourceSize": 20
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "address": [
-                    "imgc.1300k.com"
-                ],
-                "protocol": "https"
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "functions": {
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "session": {
-                                "busyCount": 0,
-                                "connectTimeout": 3,
-                                "reuseTimeout": 60,
-                                "receiveTimeout": 300
-                            },
-                            "headers": {
-                                "host": {
-                                    "enable": true,
-                                    "value": "pay.kcp.co.kr.origin.m2"
-                                }
-                            },
-                            "health": {
-                                "exclusion": {
-                                    "count": 3
-                                }
-                            }
-                        }
-                    }
-                },
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "maxSourceSize": 20,
-                            "keyword": "dims",
-                            "enable": true
-                        }
-                    }
-                }
-            },
-            "name": "pay.kcp.co.kr",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "127.0.0.1"
-                ]
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "mode": {
-                "instant": true
-            },
-            "origin": {
-                "address": [
-                    "127.0.0.1"
-                ],
-                "protocol": "http"
-            },
-            "functions": {
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "session": {
-                                "reuseTimeout": 60,
-                                "receiveTimeout": 300,
-                                "connectTimeout": 3,
-                                "busyCount": 0
-                            },
-                            "headers": {
-                                "host": {
-                                    "value": "pay.kcp.co.kr.first.origin.m2",
-                                    "enable": true
-                                }
-                            },
-                            "health": {
-                                "exclusion": {
-                                    "count": 3
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "name": "pay.kcp.co.kr.origin.m2",
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "fallback": {
-                "matchingList": [
-                    "4xx",
-                    "5xx"
-                ],
-                "enable": true,
-                "next": "pay.kcp.co.kr.second.origin.m2"
-            },
-            "name": "pay.kcp.co.kr.first.origin.m2",
-            "mode": {
-                "instant": true
-            },
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "pay.kcp.co.kr"
-                ]
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "functions": {
-                "network": {
-                    "http": {
-                        "backEnd": {
-                            "headers": {
-                                "host": {
-                                    "enable": true,
-                                    "value": "pay.kcp.co.kr"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "mode": {
-                "instant": true
-            },
-            "name": "pay.kcp.co.kr.second.origin.m2",
-            "origin": {
-                "address": [
-                    "m2.winesoft.co.kr"
-                ],
-                "protocol": "http"
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "www.lge.co.kr",
-            "origin": {
-                "address": [
-                    "www.lge.co.kr"
-                ],
-                "protocol": "http"
-            },
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "maxSourceSize": 2,
-                            "keyword": "dims",
-                            "enable": true,
-                            "minSourceSize": 0
-                        }
-                    }
-                }
-            },
-            "enable": true
-        }
-    ]
+    }
 }
