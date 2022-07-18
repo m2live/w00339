@@ -764,101 +764,33 @@
         {
             "listen": "*:80",
             "origin": {
-                "protocol": "https",
                 "address": [
                     "www.1300k.com"
-                ]
+                ],
+                "protocol": "https"
             },
-            "name": "www.1300k.com",
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "enable": true,
                             "maxSourceSize": 10,
                             "keyword": "dims",
+                            "enable": true,
                             "minSourceSize": 0
                         }
                     }
                 }
             },
+            "name": "www.1300k.com",
             "enable": true
         },
         {
             "listen": "*:80",
             "name": "imgc.1300k.com",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "enable": true,
-                            "maxSourceSize": 20,
-                            "minSourceSize": 0,
-                            "keyword": "dims"
-                        }
-                    }
-                }
-            },
             "origin": {
+                "protocol": "http",
                 "address": [
                     "imgc.1300k.com"
-                ],
-                "protocol": "http"
-            },
-            "urlRewrites": [
-                {
-                    "pattern": "(.*)(.png)$",
-                    "replace": "#1.png/dims/format/webp/quality/70/optimize"
-                },
-                {
-                    "pattern": "(.*)(.jpg)$",
-                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize"
-                }
-            ],
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "rlyfaazj0.toastcdn.net",
-            "urlRewrites": [
-                {
-                    "pattern": "(.*)(.jpg)$",
-                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize"
-                }
-            ],
-            "https": [
-                {
-                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media",
-                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media",
-                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media"
-                }
-            ],
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "enable": true,
-                            "maxSourceSize": 15,
-                            "keyword": "dims",
-                            "minSourceSize": 0
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "rlyfaazj0.toastcdn.net"
-                ]
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "www.thirtymall.com"
                 ]
             },
             "functions": {
@@ -866,9 +798,9 @@
                     "dims": {
                         "meta": {
                             "keyword": "dims",
-                            "enable": true,
                             "minSourceSize": 0,
-                            "maxSourceSize": 2
+                            "maxSourceSize": 20,
+                            "enable": true
                         }
                     }
                 }
@@ -879,15 +811,83 @@
                     "pattern": "(.*)(.png)$"
                 },
                 {
-                    "replace": "#1.gif/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.gif)$"
-                },
-                {
                     "pattern": "(.*)(.jpg)$",
                     "replace": "#1.jpg/dims/format/webp/quality/70/optimize"
                 }
             ],
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "origin": {
+                "address": [
+                    "rlyfaazj0.toastcdn.net"
+                ],
+                "protocol": "http"
+            },
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 15,
+                            "enable": true,
+                            "keyword": "dims",
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
+            "https": [
+                {
+                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media",
+                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media",
+                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media"
+                }
+            ],
+            "urlRewrites": [
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
+            "name": "rlyfaazj0.toastcdn.net",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "urlRewrites": [
+                {
+                    "replace": "#1.png/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.png)$"
+                },
+                {
+                    "replace": "#1.gif/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.gif)$"
+                },
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
             "name": "www.thirtymall.com",
+            "origin": {
+                "address": [
+                    "www.thirtymall.com"
+                ],
+                "protocol": "https"
+            },
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 2,
+                            "keyword": "dims",
+                            "enable": true,
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
             "enable": true
         }
     ]
