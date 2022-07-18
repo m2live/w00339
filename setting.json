@@ -763,25 +763,25 @@
     "hosting": [
         {
             "listen": "*:80",
+            "name": "www.1300k.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "minSourceSize": 0,
+                            "enable": true,
+                            "keyword": "dims",
+                            "maxSourceSize": 10
+                        }
+                    }
+                }
+            },
             "origin": {
                 "address": [
                     "www.1300k.com"
                 ],
                 "protocol": "https"
             },
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "maxSourceSize": 10,
-                            "keyword": "dims",
-                            "enable": true
-                        }
-                    }
-                }
-            },
-            "name": "www.1300k.com",
             "enable": true
         },
         {
@@ -790,20 +790,15 @@
                 "contents": {
                     "dims": {
                         "meta": {
-                            "enable": true,
+                            "keyword": "dims",
                             "minSourceSize": 0,
                             "maxSourceSize": 20,
-                            "keyword": "dims"
+                            "enable": true
                         }
                     }
                 }
             },
-            "origin": {
-                "address": [
-                    "imgc.1300k.com"
-                ],
-                "protocol": "http"
-            },
+            "name": "imgc.1300k.com",
             "urlRewrites": [
                 {
                     "pattern": "(.*)(.png)$",
@@ -814,24 +809,29 @@
                     "pattern": "(.*)(.jpg)$"
                 }
             ],
-            "name": "imgc.1300k.com",
+            "origin": {
+                "protocol": "http",
+                "address": [
+                    "imgc.1300k.com"
+                ]
+            },
             "enable": true
         },
         {
             "listen": "*:80",
+            "name": "www.lge.co.kr",
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
+                            "minSourceSize": 0,
                             "maxSourceSize": 2,
                             "keyword": "dims",
-                            "enable": true,
-                            "minSourceSize": 0
+                            "enable": true
                         }
                     }
                 }
             },
-            "name": "www.lge.co.kr",
             "origin": {
                 "address": [
                     "www.lge.co.kr"
@@ -842,13 +842,6 @@
         },
         {
             "listen": "*:80",
-            "https": [
-                {
-                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media",
-                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media",
-                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media"
-                }
-            ],
             "name": "rlyfaazj0.toastcdn.net",
             "urlRewrites": [
                 {
@@ -856,14 +849,21 @@
                     "replace": "#1.jpg/dims/format/webp/quality/70/optimize"
                 }
             ],
+            "https": [
+                {
+                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media",
+                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media",
+                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media"
+                }
+            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
-                            "maxSourceSize": 20,
-                            "minSourceSize": 0,
                             "keyword": "dims",
-                            "enable": true
+                            "enable": true,
+                            "minSourceSize": 0,
+                            "maxSourceSize": 15
                         }
                     }
                 }
