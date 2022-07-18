@@ -776,5 +776,136 @@
                 }
             }
         }
-    }
+    },
+    "hosting": [
+        {
+            "listen": "*:80",
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "www.1300k.com"
+                ]
+            },
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "keyword": "dims",
+                            "enable": true,
+                            "maxSourceSize": 10,
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
+            "name": "www.1300k.com",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "origin": {
+                "address": [
+                    "imgc.1300k.com"
+                ],
+                "protocol": "http"
+            },
+            "urlRewrites": [
+                {
+                    "pattern": "(.*)(.png)$",
+                    "replace": "#1.png/dims/format/webp/quality/70/optimize"
+                },
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
+            "name": "imgc.1300k.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "minSourceSize": 0,
+                            "maxSourceSize": 20,
+                            "enable": true,
+                            "keyword": "dims"
+                        }
+                    }
+                }
+            },
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "www.thirtymall.com"
+                ]
+            },
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 2,
+                            "minSourceSize": 0,
+                            "enable": true,
+                            "keyword": "dims"
+                        }
+                    }
+                }
+            },
+            "name": "www.thirtymall.com",
+            "urlRewrites": [
+                {
+                    "replace": "#1.png/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.png)$"
+                },
+                {
+                    "replace": "#1.gif/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.gif)$"
+                },
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    " www.thirtymall.com"
+                ]
+            },
+            "urlRewrites": [
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
+            "name": "158.247.203.38",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "maxSourceSize": 17,
+                            "minSourceSize": 0,
+                            "keyword": "dims",
+                            "enable": true
+                        }
+                    }
+                }
+            },
+            "https": [
+                {
+                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media",
+                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media",
+                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media"
+                }
+            ],
+            "enable": true
+        }
+    ]
 }
