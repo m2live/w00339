@@ -108,6 +108,23 @@
                                 "doc": "m2nodes/#m2live.nodeId/feedbacks"
                             }
                         }
+                    },
+                    "heartbeat": {
+                        "enable": true,
+                        "feedback": {
+                            "type": "firestore",
+                            "info": {
+                                "connect": "myFirebase",
+                                "doc": "m2nodes/#m2live.nodeId/heartbeats",
+                                "schedule": "*/15 * * * * *",
+                                "metrics": {
+                                    "system": true,
+                                    "rt": true,
+                                    "hosting": true,
+                                    "node": true
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -759,136 +776,5 @@
                 }
             }
         }
-    },
-    "hosting": [
-        {
-            "listen": "*:80",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "keyword": "dims",
-                            "enable": true,
-                            "minSourceSize": 0,
-                            "maxSourceSize": 10
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "address": [
-                    "www.1300k.com"
-                ],
-                "protocol": "https"
-            },
-            "name": "www.1300k.com",
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "imgc.1300k.com",
-            "origin": {
-                "address": [
-                    "imgc.1300k.com"
-                ],
-                "protocol": "http"
-            },
-            "urlRewrites": [
-                {
-                    "replace": "#1.png/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.png)$"
-                },
-                {
-                    "pattern": "(.*)(.jpg)$",
-                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize"
-                }
-            ],
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "minSourceSize": 0,
-                            "enable": true,
-                            "keyword": "dims",
-                            "maxSourceSize": 20
-                        }
-                    }
-                }
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "name": "www.thirtymall.com",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "maxSourceSize": 2,
-                            "minSourceSize": 0,
-                            "keyword": "dims",
-                            "enable": true
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "address": [
-                    "www.thirtymall.com"
-                ],
-                "protocol": "https"
-            },
-            "urlRewrites": [
-                {
-                    "replace": "#1.png/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.png)$"
-                },
-                {
-                    "replace": "#1.gif/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.gif)$"
-                },
-                {
-                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.jpg)$"
-                }
-            ],
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "https": [
-                {
-                    "cert": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-ba19e1dd-68f7-4613-afba-3d1ffc8fc337?generation=1657862852755136&alt=media",
-                    "key": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-bf2426d5-9fbf-4171-910c-1eae62445fe7?generation=1657862902684540&alt=media",
-                    "ca": "https://storage.googleapis.com/download/storage/v1/b/stg-m2live-api.appspot.com/o/services%2Fstg-281bb106-85fe-492a-b0a5-bfd70a4522a9?generation=1657862859354095&alt=media"
-                }
-            ],
-            "urlRewrites": [
-                {
-                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
-                    "pattern": "(.*)(.jpg)$"
-                }
-            ],
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "maxSourceSize": 15,
-                            "keyword": "dims",
-                            "minSourceSize": 0,
-                            "enable": true
-                        }
-                    }
-                }
-            },
-            "origin": {
-                "address": [
-                    " www.thirtymall.com"
-                ],
-                "protocol": "https"
-            },
-            "name": "158.247.203.38",
-            "enable": true
-        }
-    ]
+    }
 }
