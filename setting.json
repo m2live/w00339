@@ -763,66 +763,20 @@
     "hosting": [
         {
             "listen": "*:80",
+            "name": "www.1300k.com",
             "origin": {
+                "protocol": "https",
                 "address": [
                     "www.1300k.com"
-                ],
-                "protocol": "https"
+                ]
             },
-            "name": "www.1300k.com",
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
                             "maxSourceSize": 10,
                             "keyword": "dims",
-                            "enable": true,
-                            "minSourceSize": 0
-                        }
-                    }
-                }
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "origin": {
-                "address": [
-                    "pay.kcp.co.kr"
-                ],
-                "protocol": "https"
-            },
-            "name": "pay.kcp.co.kr",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "enable": true,
-                            "maxSourceSize": 20,
                             "minSourceSize": 0,
-                            "keyword": "dims"
-                        }
-                    }
-                }
-            },
-            "enable": true
-        },
-        {
-            "listen": "*:80",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "www.lge.co.kr"
-                ]
-            },
-            "name": "www.lge.co.kr",
-            "functions": {
-                "contents": {
-                    "dims": {
-                        "meta": {
-                            "keyword": "dims",
-                            "minSourceSize": 0,
-                            "maxSourceSize": 2,
                             "enable": true
                         }
                     }
@@ -832,31 +786,81 @@
         },
         {
             "listen": "*:80",
-            "origin": {
-                "protocol": "http",
-                "address": [
-                    "imgc.1300k.com"
-                ]
-            },
-            "name": "imgc.1300k.com",
-            "urlRewrites": [
-                {
-                    "pattern": "(.*)(.png)$",
-                    "replace": "#1.png/dims/format/webp"
-                }
-            ],
             "functions": {
                 "contents": {
                     "dims": {
                         "meta": {
                             "minSourceSize": 0,
-                            "keyword": "dims",
+                            "maxSourceSize": 20,
                             "enable": true,
-                            "maxSourceSize": 20
+                            "keyword": "dims"
                         }
                     }
                 }
             },
+            "origin": {
+                "protocol": "https",
+                "address": [
+                    "pay.kcp.co.kr"
+                ]
+            },
+            "name": "pay.kcp.co.kr",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "origin": {
+                "address": [
+                    "www.lge.co.kr"
+                ],
+                "protocol": "http"
+            },
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "enable": true,
+                            "minSourceSize": 0,
+                            "maxSourceSize": 2,
+                            "keyword": "dims"
+                        }
+                    }
+                }
+            },
+            "name": "www.lge.co.kr",
+            "enable": true
+        },
+        {
+            "listen": "*:80",
+            "name": "imgc.1300k.com",
+            "functions": {
+                "contents": {
+                    "dims": {
+                        "meta": {
+                            "enable": true,
+                            "maxSourceSize": 20,
+                            "keyword": "dims",
+                            "minSourceSize": 0
+                        }
+                    }
+                }
+            },
+            "origin": {
+                "address": [
+                    "imgc.1300k.com"
+                ],
+                "protocol": "http"
+            },
+            "urlRewrites": [
+                {
+                    "replace": "#1.png/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.png)$"
+                },
+                {
+                    "replace": "#1.jpg/dims/format/webp/quality/70/optimize",
+                    "pattern": "(.*)(.jpg)$"
+                }
+            ],
             "enable": true
         }
     ]
